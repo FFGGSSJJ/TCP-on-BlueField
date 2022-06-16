@@ -1,0 +1,2 @@
+# NUS-Project
+In this project, we aim to design better system software for new-generation programmable data plane hardware. The goal is to design a compiler framework that takes high-level descriptions of both the deployed network services and the underlying hardware constraints, and automatically generates performance optimized, resource efficient hardware code, without manual programmer efforts.
