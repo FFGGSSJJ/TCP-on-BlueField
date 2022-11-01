@@ -58,7 +58,7 @@ destroy_doca_flow_ports(int nb_ports, struct doca_flow_port *ports[])
 
 	for (portid = 0; portid < nb_ports; portid++) {
 		if (ports[portid] != NULL)
-			doca_flow_destroy_port(portid);
+			doca_flow_port_destroy(ports[portid]);
 	}
 }
 

@@ -40,18 +40,18 @@ create_hairpin_pipe(struct doca_flow_port *port, int port_id, struct doca_flow_e
 	memset(&fwd, 0, sizeof(fwd));
 	memset(&pipe_cfg, 0, sizeof(pipe_cfg));
 
-	pipe_cfg.name = "HAIRPIN_PIPE";
-	pipe_cfg.type = DOCA_FLOW_PIPE_BASIC;
+	pipe_cfg.attr.name = "HAIRPIN_PIPE";
+	pipe_cfg.attr.type = DOCA_FLOW_PIPE_BASIC;
+	pipe_cfg.attr.is_root = false;
 	pipe_cfg.match = &match;
 	pipe_cfg.actions = &actions;
-	pipe_cfg.is_root = false;
 	pipe_cfg.port = port;
 
 	/* forwarding traffic to other port */
 	fwd.type = DOCA_FLOW_FWD_PORT;
 	fwd.port_id = port_id ^ 1;
 
-	pipe = doca_flow_create_pipe(&pipe_cfg, &fwd, NULL, error);
+	pipe = doca_flow_pipe_create(&pipe_cfg, &fwd, NULL, error);
 	if (pipe == NULL) {
 		DOCA_LOG_ERR("Failed to create hairpin pipe - %s (%u)", error->message, error->type);
 		return NULL;
@@ -81,11 +81,11 @@ create_drop_pipe(struct doca_flow_port *port, struct doca_flow_pipe *hairpin_pip
 	memset(&fwd, 0, sizeof(fwd_miss));
 	memset(&pipe_cfg, 0, sizeof(pipe_cfg));
 
-	pipe_cfg.name = "DROP_PIPE";
-	pipe_cfg.type = DOCA_FLOW_PIPE_BASIC;
+	pipe_cfg.attr.name = "DROP_PIPE";
+	pipe_cfg.attr.type = DOCA_FLOW_PIPE_BASIC;
+	pipe_cfg.attr.is_root = true;
 	pipe_cfg.match = &match;
 	pipe_cfg.actions = &actions;
-	pipe_cfg.is_root = true;
 	pipe_cfg.port = port;
 
 	/* 5 tuple match */
@@ -102,7 +102,7 @@ create_drop_pipe(struct doca_flow_port *port, struct doca_flow_pipe *hairpin_pip
 	fwd_miss.type = DOCA_FLOW_FWD_PIPE;
 	fwd_miss.next_pipe = hairpin_pipe;
 
-	return doca_flow_create_pipe(&pipe_cfg, &fwd, &fwd_miss, error);
+	return doca_flow_pipe_create(&pipe_cfg, &fwd, &fwd_miss, error);
 }
 
 struct doca_flow_pipe_entry *
@@ -192,7 +192,7 @@ flow_drop(int nb_queues)
 
 	for (port_id = 0; port_id < nb_ports; port_id++) {
 		/* dump port info to a file */
-		doca_flow_port_pipes_dump(port_id, files[port_id]);
+		doca_flow_port_pipes_dump(ports[port_id], files[port_id]);
 
 		if (doca_flow_query(entry[port_id], &query_stats) < 0) {
 			DOCA_LOG_ERR("Failed to query entry - %s (%u)", error.message, error.type);
