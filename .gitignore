@@ -5,6 +5,7 @@
 *.bin
 
 ## Folders
+?build/
 ?run/
 ?ipcache/
 ?vscode/
