@@ -41,10 +41,10 @@ endif
 # Uncomment this line to remove warnings of experimental compile
 add_project_arguments('-D DOCA_ALLOW_EXPERIMENTAL_API', language: 'c')
 
-# libdpdk_dep = dependency('libdpdk', required : false)
-#if not libdpdk_dep.found()
-#	error('please set PKG_CONFIG_PATH to dpdk packages path, for further instructions check DOCA manuals')
-#endif
+libdpdk_dep = dependency('libdpdk', required : false)
+if not libdpdk_dep.found()
+	error('please set PKG_CONFIG_PATH to dpdk packages path, for further instructions check DOCA manuals')
+endif
 # thread_dep = dependency('threads', required : true)
 # libutils_dep = dependency('doca-utils', required : true)
 # libdpi_dep = dependency('doca-dpi', required : true)
