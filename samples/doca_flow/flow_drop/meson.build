@@ -49,6 +49,8 @@ add_project_arguments('-D DOCA_ALLOW_EXPERIMENTAL_API', language: 'c')
 # libutils_dep = dependency('doca-utils', required : true)
 # libdpi_dep = dependency('doca-dpi', required : true)
 # libcommon_dep = dependency('doca-common', required : true)
+docacommon_dep = dependency('doca-common', required : true)
+docaflow_dep = dependency('doca-flow', required : true)
 
 flow_drop_src = [
 	'./flow_drop.c',
@@ -57,4 +59,4 @@ flow_drop_src = [
 
 common_dir = include_directories('./../common')
 
-executable('doca_flow_drop', flow_drop_src, dependencies : [], include_directories : [common_dir], install: false)
+executable('doca_flow_drop', flow_drop_src, dependencies : [doca_dep], include_directories : [common_dir], install: false)
