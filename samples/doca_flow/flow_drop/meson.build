@@ -59,4 +59,4 @@ flow_drop_src = [
 
 common_dir = include_directories('./../common')
 
-executable('doca_flow_drop', flow_drop_src, dependencies : [doca_dep], include_directories : [common_dir], install: false)
+executable('doca_flow_drop', flow_drop_src, dependencies : [docacommon_dep, docaflow_dep], include_directories : [common_dir], install: false)
