@@ -4,11 +4,13 @@
 
 ### Issues
 
-This part records issues that I encoutered during the development.
+This part records issues that I encoutered during the development.\
+
+------
 
 
 
-##### 1.DOCA Version Problem
+### 1.DOCA Version Problem
 
 The original local doca environment on the BlueField Card is really out of date. And I found the card cannot access the internet, in which case I cannot update the `doca-runtime`, `doca-tools` and `doca-sdk`.
 
@@ -18,7 +20,11 @@ Refer to this official doc for details:
 
 - https://docs.nvidia.com/doca/sdk/installation-guide-for-linux/index.html
 
-##### 2.DPDK Problem
+------
+
+
+
+### 2.DPDK Problem
 
 The original system only downloaded the `dpdk` release (located at `~/dpdk-20.11`) and did not build and install it at all.... It took me one afternoon to finally figure out that there is no `dpdk lib` installed in this system at all as I thought the environment has been settled down before I use it.
 
@@ -57,9 +63,11 @@ Refer to these blogs for details:
 - https://support.mellanox.com/s/article/Configuring-DPDK-and-Running-testpmd-on-BlueField-2
 - https://medium.com/codex/nvidia-mellanox-bluefield-2-smartnic-dpdk-rig-for-dive-part-ii-change-mode-of-operation-a994f0f0e543
 
+------
 
 
-##### 3.RTE_FORCE_INTRINSICS
+
+### 3.RTE_FORCE_INTRINSICS
 
 When I tried to compile certain sample doca codes provided, I encountered one error as shown:
 
@@ -72,9 +80,11 @@ When I tried to compile certain sample doca codes provided, I encountered one er
 
 No idea why this occurs. Accroding to this [blog](https://medium.com/codex/nvidia-mellanox-bluefield-2-smartnic-dpdk-rig-for-dive-part-ii-change-mode-of-operation-a994f0f0e543), I simply modify the header file and comment that sentence out.
 
+------
 
 
-##### 4.undefined symbol of dpdk
+
+### 4.undefined symbol of dpdk
 
 The error occurs when I tried to execute `doca_flow_drop`:
 
