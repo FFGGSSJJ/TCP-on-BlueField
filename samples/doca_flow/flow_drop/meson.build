@@ -45,12 +45,12 @@ libdpdk_dep = dependency('libdpdk', required : false)
 if not libdpdk_dep.found()
 	error('please set PKG_CONFIG_PATH to dpdk packages path, for further instructions check DOCA manuals')
 endif
+docacommon_dep = dependency('doca-common', required : true)
+docaflow_dep = dependency('doca-flow', required : true)
 # thread_dep = dependency('threads', required : true)
 # libutils_dep = dependency('doca-utils', required : true)
 # libdpi_dep = dependency('doca-dpi', required : true)
 # libcommon_dep = dependency('doca-common', required : true)
-docacommon_dep = dependency('doca-common', required : true)
-docaflow_dep = dependency('doca-flow', required : true)
 
 flow_drop_src = [
 	'./flow_drop.c',
