@@ -209,3 +209,13 @@ flow_drop(int nb_queues)
 	doca_flow_destroy();
 	return 0;
 }
+
+int main()
+{
+	if (flow_drop(1) == 0) {
+		DOCA_LOG_INFO("Flow Drop Worked\n");
+	} else {
+		DOCA_LOG_INFO("Flow Drop Failed\n");
+	}
+	return 0;
+}
