@@ -1,10 +1,6 @@
-# Guide for DOCA Develop
+# Issues for DOCA Env/Develop
 
-
-
-## Issues
-
-This part records issues that I encoutered during the development.\
+> This doc records issues that I encoutered during the environment setup and development.
 
 ------
 
@@ -13,6 +9,8 @@ This part records issues that I encoutered during the development.\
 ### 1.DOCA Version Problem
 
 The original local doca environment on the BlueField Card is really out of date. And I found the card cannot access the internet, in which case I cannot update the `doca-runtime`, `doca-tools` and `doca-sdk`.
+
+##### Solution
 
 If you encounter any problem in the doca library file during the compilation, update the environment by `apt-install`.
 
@@ -54,7 +52,7 @@ drivers:
 	event/dlb2:	only supported on x86_64 Linux
 ```
 
-
+##### Solution
 
 If you see any problem related to `dpdk`, I am not sure what is happening. I should have set everything down.
 
@@ -77,6 +75,8 @@ When I tried to compile certain sample doca codes provided, I encountered one er
       |    ^~~~~
 ...
 ```
+
+##### Solution
 
 No idea why this occurs. Accroding to this [blog](https://medium.com/codex/nvidia-mellanox-bluefield-2-smartnic-dpdk-rig-for-dive-part-ii-change-mode-of-operation-a994f0f0e543), I simply modify the header file and comment that sentence out.
 
@@ -112,11 +112,25 @@ Libs.private: -Wl,--whole-archive -L${libdir} -l:librte_bus_auxiliary.a -l:librt
 Cflags: -I${includedir}
 ```
 
+##### Solution
+
+**2022-10-31**: I checked over the internet and docs, and finally decided to reinstall the `dpdk` lib with a stable version: `stable-20.11.1`.
+
+**2022-11-02**: failed to install `dpdk-stable-20.11.1` due to another environment problem as shown below:
+
+```shell
+drivers/regex/octeontx2/meson.build:15:1: ERROR: Include dir /include does not exist.
+```
+
+I checked into `drivers/regex/octeontx2/meson.build` and noticed that there is a build statement saying: `includes += include_directories(inc_dir)` where `inc_dir` is not defined. ***Not sure how to solve it***.
+
+**2022-11-03**: failed to install `dpdk-stable-20.11.1` and I decided to install `dpdk-21.11`
 
 
-2022-10-31: I checked over the internet and docs, and finally decided to reinstall the `dpdk` lib with a stable version: `stable-20.11.1`.
 
-2022-11-02: failed to install `dpdk-stable-20.11.1` due to another environment problem and I decided to turn to `docker` container environment for development.... no idea what should I do when it comes to deployment
+### 5.DOCKER Container
+
+I decided to turn to `docker` container environment for development as the local environment is really a shit.... no idea what should I do when it comes to deployment
 
 
 
