@@ -2,7 +2,7 @@
 
 
 
-### Issues
+## Issues
 
 This part records issues that I encoutered during the development.\
 
