@@ -27,7 +27,7 @@ init_doca_flow(int nb_queues, uint32_t nb_meters, uint32_t nb_counters, struct d
 	memset(&flow_cfg, 0, sizeof(flow_cfg));
 
 	flow_cfg.queues = nb_queues;
-	flow_cfg.mode_args = "vnf,hws";
+	flow_cfg.mode_args = "hws";
 	// flow_cfg.nr_shared_resources = DOCA_FLOW_SHARED_RESOURCE_MAX;
 	flow_cfg.resource.nb_meters = nb_meters;
 	flow_cfg.resource.nb_counters = nb_counters;
