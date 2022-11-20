@@ -6,6 +6,14 @@
 
 
 
+### 0.General
+
+- Refer to this [link](https://linux.mellanox.com/public/repo/doca/latest/ubuntu20.04/aarch64/) for the latest `DOCA` sdk/tool/samples and so on. The gitlab of NVIDIA never updates and is out-of-date.
+- Refer to this [repo](https://github.com/Mellanox/bf-release) for the latest Bluefield release.
+- sudo ./dpdk-testpmd -a 03:00.0,representor=[0,65535] -- -i -a --total-num-mbufs=1025
+
+
+
 ### 1.DOCA Version Problem
 
 ##### Issue description
@@ -211,5 +219,9 @@ The error is `EAL: Error - exiting with code: 1. Cause: Creation of mbuf pool fo
 
 
 
+### 6.Hugepage Problem
 
+- If `EAL initialization error` encountered due to hugepage:
+  - https://stackoverflow.com/questions/67996554/eal-initialization-error-on-running-dpdk-sample-program
 
+- 
